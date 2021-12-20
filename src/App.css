@@ -1,0 +1,64 @@
+#app{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: column;
+  
+}
+body{
+  background:whitesmoke;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator{
+  background:black;
+  width:320px;
+  padding:5px;
+  position: relative;
+  /* top:50%;;
+  left:50%; */
+  margin:auto;
+  margin-top:20vh;  
+}
+#cell{
+  min-height:30px;
+  color:white;
+  background-color: black;
+  text-align:right;
+  font-size:20px;
+  line-height:20px;
+  overflow-wrap: break-word;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button{
+  position: relative;
+  height: 60px;
+  width: 80px;
+  font-size:20px;
+  cursor:pointer;
+}
+.jumbo{
+  width:160px
+}
+.equal{
+  background: #004466;
+  position: absolute;
+  height: 120px;
+}
+.display{
+  border: 1px solid whitesmoke;
+  margin: 2px;
+  padding: 7px
+}
+.jumbo-ac{
+  width:160px;
+  background:#ac3939;
+}
+.oprator{
+  background: #666666;
+}
