@@ -1,4 +1,4 @@
-# Quote genrator
+# JS-Calculator
 
 iThis project i build calculator using react and javascript it was fun and lot of debugging at the same time!
 
