@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
-// import Buttons from './Buttons'
 import Header from "./Header";
 import Footer from "./Footer";
 var count=0;
 var result = 0;
+let calculate=false;
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -28,26 +28,15 @@ export default class App extends Component {
       document.getElementById("decimal").disabled = false; 
       count=0;
     }
-    // else if(/[0-9]/.test(val)){
-    //   document.getElementById("decimal").disabled = false; 
-    // }
+  
   }
   hanldeClick(e) {
     //if calculation is done,clear value state for new calculation if not then keep the state as it is
-    // if( !(e.target.value == "+" ||
-    // e.target.value == "-" ||
-    // e.target.value == "*" ||
-    // e.target.value == "/")){
+  
       this.search(e.target.value);
-    // }
-  // const operators=/[+-*/]/;
-    
-    
-    // this.setState({
-    //   value:"",
-    // })
+
     if (result) {
-      // if(this.state.value.includes())
+      
       if (
         e.target.value == "+" ||
         e.target.value == "-" ||
@@ -68,19 +57,28 @@ export default class App extends Component {
         value: s,
       });
     } //end of if
-    var k=this.state.value;
-   if( e.target.value == "+" ||
+    
+  else if( e.target.value == "+" ||
     e.target.value == "*" ||
     e.target.value == "/"
 ){
-  // console.log(k.charAt(k.length-1))
-  k=k.replace(e.target.value,k.charAt(k.length-1));
-  k+= e.target.value;
+  //5*-5=-25
+  //5*-+5=10
+  //5*-+5=5*+5=25
+  // console.log(s)
+    if(s.charAt(s.length-1)=="+"||s.charAt(s.length-1)=="-"||s.charAt(s.length-1)=="*"||s.charAt(s.length-1)=="/"){
+      s=s.replace(s.charAt(s.length-1),"");
+      if(s.charAt(s.length-1)=="+"||s.charAt(s.length-1)=="-"||s.charAt(s.length-1)=="*"||s.charAt(s.length-1)=="/"){
+        s=s.replace(s.charAt(s.length-1),"");
+      }
+    
+  }
+  s+=e.target.value
+console.log(s,e.target.value)
       this.setState({
-        value:k
+        value:s
       })
-      console.log(k)
-      // console.log(this.state.value)
+      
     }
 
 
@@ -95,29 +93,30 @@ export default class App extends Component {
         this.setState({
         value: this.state.value + e.target.value,
       });
-      // let k = this.state.value;
-      // let lastChar=k.charAt(k.length-1);
-      // let secondLastChar=k.charAt(k.length-2);
-      // // if(lastChar== "+"||lastChar== "*"||lastChar== "/" || lastChar=="-"){
-      //   // if(secondLastChar=="-"|| secondLastChar== "+"||secondLastChar== "*"||secondLastChar== "/"){
-      //    k= k.slice(0,-2)+e.target.value;
-      //     this.setState({
-      //       value:k
-      //     })
-      //   // }
-      //   if( e.target.value == "+" ||
-      //   e.target.value == "*" ||
-      //   e.target.value == "/"){
-
-      //     k=k.slice(0,-1)+e.target.value;
-      //     this.setState({
-      //       value:k
-      //     })
-      //   }
-  
-      // }
+     
     }
     } //end of else
+    if( !(e.target.value == "+" ||
+    e.target.value == "-" ||
+    e.target.value == "*" ||
+    e.target.value == "/") && calculate==true){
+      calculate=false;
+      this.setState({
+        value:e.target.value
+      })
+    }
+    else if(this.state.value=="0"){
+        this.setState({
+          value:e.target.value
+        })
+      }
+    else{
+      let temp=this.state.value+e.target.value
+      this.setState({
+        value:temp
+      })
+    }
+    
   }
   ac() {
     this.setState({
@@ -128,34 +127,20 @@ export default class App extends Component {
     document.getElementById("decimal").disabled = false; 
   }
   calc() {
-    // console.log(this.state.value[(this.state.value).length-1])
-    // console.log(this.state.value.slice(-1))
-    // var str=[this.state.value]
-    // console.log(str)
+   calculate=true;
     this.setState({
       value: eval(this.state.value),
     });
-  //   // console.log(parseInt(this.state.value))
-  //   console.log(parseFloat(this.state.value)) 
-  //   console.log(parseFloat(this.state.value)<=0) 
-  //   result = 1;
-  //   if (parseInt(this.state.value)<=0){
-  //     console.log("i am in the roundung statement")
-  //     let round=parseFloat(this.state.value).toFixed(4);
-  //     let roundText=round.toString(2);
-  //     console.log(roundText);
-  //     this.setState({
-  //       value:roundText,
-  //     });
-  // }
+    
+ 
 }
   render() {
-    // console.log(this.state.value)
+
     return (
       <>
         <Header />
         <div className="calculator">
-          {/* <Buttons/> */}
+          
 
           <div>
             <div className="display" id="main-display">
