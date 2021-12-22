@@ -15,7 +15,7 @@ export default class App extends Component {
     this.ac = this.ac.bind(this);
     this.calc = this.calc.bind(this);
     this.search=this.search.bind(this);
-    // var wholeStr=this.state.value
+    
   }
    search(val){
     if (val == "." ){
@@ -47,7 +47,7 @@ export default class App extends Component {
     //   value:"",
     // })
     if (result) {
-      if(this.state.value.includes())
+      // if(this.state.value.includes())
       if (
         e.target.value == "+" ||
         e.target.value == "-" ||
@@ -68,12 +68,22 @@ export default class App extends Component {
         value: s,
       });
     } //end of if
-    else if(e.target.value == "+" ||
-    e.target.value == "-" ||
+    var k=this.state.value;
+   if( e.target.value == "+" ||
     e.target.value == "*" ||
-    e.target.value == "/"){
-      
+    e.target.value == "/"
+){
+  // console.log(k.charAt(k.length-1))
+  k=k.replace(e.target.value,k.charAt(k.length-1));
+  k+= e.target.value;
+      this.setState({
+        value:k
+      })
+      console.log(k)
+      // console.log(this.state.value)
     }
+
+
     else {
       if(this.state.value=="0"){
         this.setState({
@@ -85,6 +95,27 @@ export default class App extends Component {
         this.setState({
         value: this.state.value + e.target.value,
       });
+      // let k = this.state.value;
+      // let lastChar=k.charAt(k.length-1);
+      // let secondLastChar=k.charAt(k.length-2);
+      // // if(lastChar== "+"||lastChar== "*"||lastChar== "/" || lastChar=="-"){
+      //   // if(secondLastChar=="-"|| secondLastChar== "+"||secondLastChar== "*"||secondLastChar== "/"){
+      //    k= k.slice(0,-2)+e.target.value;
+      //     this.setState({
+      //       value:k
+      //     })
+      //   // }
+      //   if( e.target.value == "+" ||
+      //   e.target.value == "*" ||
+      //   e.target.value == "/"){
+
+      //     k=k.slice(0,-1)+e.target.value;
+      //     this.setState({
+      //       value:k
+      //     })
+      //   }
+  
+      // }
     }
     } //end of else
   }
@@ -119,7 +150,7 @@ export default class App extends Component {
   // }
 }
   render() {
-    console.log(this.state.value)
+    // console.log(this.state.value)
     return (
       <>
         <Header />
