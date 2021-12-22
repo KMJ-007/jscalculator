@@ -3,6 +3,7 @@ import "./App.css";
 // import Buttons from './Buttons'
 import Header from "./Header";
 import Footer from "./Footer";
+var count=0;
 var result = 0;
 export default class App extends Component {
   constructor(props) {
@@ -14,24 +15,32 @@ export default class App extends Component {
     this.ac = this.ac.bind(this);
     this.calc = this.calc.bind(this);
     this.search=this.search.bind(this);
+    // var wholeStr=this.state.value
   }
-
-   search(){
-    if (/\./.test(this.state.value)){
+   search(val){
+    if (val == "." ){
       document.getElementById("decimal").disabled = true; 
-    }else{
+      count+=1;
+    }else if(val == "+" ||
+    val == "-" ||
+    val == "*" ||
+    val == "/" && count == 0){
       document.getElementById("decimal").disabled = false; 
-
+      count=0;
     }
+    // else if(/[0-9]/.test(val)){
+    //   document.getElementById("decimal").disabled = false; 
+    // }
   }
   hanldeClick(e) {
     //if calculation is done,clear value state for new calculation if not then keep the state as it is
-    if( !(e.target.value == "+" ||
-    e.target.value == "-" ||
-    e.target.value == "*" ||
-    e.target.value == "/")){
-      this.search();
-    }
+    // if( !(e.target.value == "+" ||
+    // e.target.value == "-" ||
+    // e.target.value == "*" ||
+    // e.target.value == "/")){
+      this.search(e.target.value);
+    // }
+  // const operators=/[+-*/]/;
     
     
     // this.setState({
@@ -59,6 +68,12 @@ export default class App extends Component {
         value: s,
       });
     } //end of if
+    else if(e.target.value == "+" ||
+    e.target.value == "-" ||
+    e.target.value == "*" ||
+    e.target.value == "/"){
+      
+    }
     else {
       if(this.state.value=="0"){
         this.setState({
@@ -76,10 +91,16 @@ export default class App extends Component {
   ac() {
     this.setState({
       value: "0",
+      
     });
+    count=0;
+    document.getElementById("decimal").disabled = false; 
   }
   calc() {
-    
+    // console.log(this.state.value[(this.state.value).length-1])
+    // console.log(this.state.value.slice(-1))
+    // var str=[this.state.value]
+    // console.log(str)
     this.setState({
       value: eval(this.state.value),
     });
