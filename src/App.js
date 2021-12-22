@@ -13,10 +13,32 @@ export default class App extends Component {
     this.hanldeClick = this.hanldeClick.bind(this);
     this.ac = this.ac.bind(this);
     this.calc = this.calc.bind(this);
+    this.search=this.search.bind(this);
+  }
+
+   search(){
+    if (/\./.test(this.state.value)){
+      document.getElementById("decimal").disabled = true; 
+    }else{
+      document.getElementById("decimal").disabled = false; 
+
+    }
   }
   hanldeClick(e) {
     //if calculation is done,clear value state for new calculation if not then keep the state as it is
+    if( !(e.target.value == "+" ||
+    e.target.value == "-" ||
+    e.target.value == "*" ||
+    e.target.value == "/")){
+      this.search();
+    }
+    
+    
+    // this.setState({
+    //   value:"",
+    // })
     if (result) {
+      if(this.state.value.includes())
       if (
         e.target.value == "+" ||
         e.target.value == "-" ||
@@ -32,19 +54,28 @@ export default class App extends Component {
     } //end of if
     let s = this.state.value;
     if (e.target.value == "." && s.charAt(s.length - 1) == ".") {
+      
       this.setState({
         value: s,
       });
     } //end of if
     else {
-      this.setState({
+      if(this.state.value=="0"){
+        this.setState({
+          value:e.target.value
+        })
+      }
+      else{
+
+        this.setState({
         value: this.state.value + e.target.value,
       });
+    }
     } //end of else
   }
   ac() {
     this.setState({
-      value: "  ",
+      value: "0",
     });
   }
   calc() {
@@ -67,6 +98,7 @@ export default class App extends Component {
   // }
 }
   render() {
+    console.log(this.state.value)
     return (
       <>
         <Header />
@@ -74,8 +106,8 @@ export default class App extends Component {
           {/* <Buttons/> */}
 
           <div>
-            <div className="display" id="display">
-              <input type="text" id="cell" value={this.state.value} readOnly />
+            <div className="display" id="main-display">
+              <input type="text" id="display" value={this.state.value} readOnly />
             </div>
             <button
               id="clear"

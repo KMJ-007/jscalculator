@@ -29,7 +29,7 @@ body {
   left:50%; */
   margin: auto;
 }
-#cell {
+#display {
   min-height: 30px;
   color: white;
   background-color: black;
