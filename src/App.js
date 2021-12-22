@@ -44,15 +44,28 @@ export default class App extends Component {
   }
   ac() {
     this.setState({
-      value: "",
+      value: "  ",
     });
   }
   calc() {
+    
     this.setState({
       value: eval(this.state.value),
     });
-    result = 1;
-  }
+  //   // console.log(parseInt(this.state.value))
+  //   console.log(parseFloat(this.state.value)) 
+  //   console.log(parseFloat(this.state.value)<=0) 
+  //   result = 1;
+  //   if (parseInt(this.state.value)<=0){
+  //     console.log("i am in the roundung statement")
+  //     let round=parseFloat(this.state.value).toFixed(4);
+  //     let roundText=round.toString(2);
+  //     console.log(roundText);
+  //     this.setState({
+  //       value:roundText,
+  //     });
+  // }
+}
   render() {
     return (
       <>
