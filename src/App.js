@@ -66,6 +66,7 @@ export default class App extends Component {
   //5*-+5=10
   //5*-+5=5*+5=25
   // console.log(s)
+  
     if(s.charAt(s.length-1)=="+"||s.charAt(s.length-1)=="-"||s.charAt(s.length-1)=="*"||s.charAt(s.length-1)=="/"){
       s=s.replace(s.charAt(s.length-1),"");
       if(s.charAt(s.length-1)=="+"||s.charAt(s.length-1)=="-"||s.charAt(s.length-1)=="*"||s.charAt(s.length-1)=="/"){
