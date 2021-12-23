@@ -4,7 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 var count=0;
 var result = 0;
-let calculate=false;
+let calculated=false;
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +51,7 @@ export default class App extends Component {
       }
     } //end of if
     let s = this.state.value;
+  console.log("value of S",s);
     if (e.target.value == "." && s.charAt(s.length - 1) == ".") {
       
       this.setState({
@@ -60,19 +61,16 @@ export default class App extends Component {
     
   else if( e.target.value == "+" ||
     e.target.value == "*" ||
-    e.target.value == "/"
-){
+    e.target.value == "/"){
   //5*-5=-25
   //5*-+5=10
   //5*-+5=5*+5=25
   // console.log(s)
-  
+  if(s.charAt(s.length-1)=="+"||s.charAt(s.length-1)=="-"||s.charAt(s.length-1)=="*"||s.charAt(s.length-1)=="/"){
+    s=s.replace(s.charAt(s.length-1),"");
     if(s.charAt(s.length-1)=="+"||s.charAt(s.length-1)=="-"||s.charAt(s.length-1)=="*"||s.charAt(s.length-1)=="/"){
-      s=s.replace(s.charAt(s.length-1),"");
-      if(s.charAt(s.length-1)=="+"||s.charAt(s.length-1)=="-"||s.charAt(s.length-1)=="*"||s.charAt(s.length-1)=="/"){
-        s=s.replace(s.charAt(s.length-1),"");
-      }
-    
+    s=s.replace(s.charAt(s.length-1),"");
+  }
   }
   s+=e.target.value
 console.log(s,e.target.value)
@@ -89,6 +87,23 @@ console.log(s,e.target.value)
           value:e.target.value
         })
       }
+      else if((e.target.value=="0"||e.target.value=="1"||e.target.value=="2"||e.target.value=="3"||e.target.value=="4"||e.target.value=="5"||e.target.value=="6"||e.target.value=="7"||e.target.value=="8"||e.target.value=="9") && calculated==true){
+        calculated=false;
+        // console.log("yes i am number pressed after calculation completed")
+        // console.log("key i preseed",e.target.value);
+        this.setState({
+          value:e.target.value
+        })
+
+      }else if( e.target.value == "+" ||
+      e.target.value == "-" ||
+      e.target.value == "*" ||
+      e.target.value == "/"){
+        // console.log("you have pressed opreator")
+        this.setState({
+          value:this.state.value+e.target.value
+        })
+      }
       else{
 
         this.setState({
@@ -97,27 +112,6 @@ console.log(s,e.target.value)
      
     }
     } //end of else
-    if( !(e.target.value == "+" ||
-    e.target.value == "-" ||
-    e.target.value == "*" ||
-    e.target.value == "/") && calculate==true){
-      calculate=false;
-      this.setState({
-        value:e.target.value
-      })
-    }
-    else if(this.state.value=="0"){
-        this.setState({
-          value:e.target.value
-        })
-      }
-    else{
-      let temp=this.state.value+e.target.value
-      this.setState({
-        value:temp
-      })
-    }
-    
   }
   ac() {
     this.setState({
@@ -128,7 +122,7 @@ console.log(s,e.target.value)
     document.getElementById("decimal").disabled = false; 
   }
   calc() {
-   calculate=true;
+   calculated=true;
     this.setState({
       value: eval(this.state.value),
     });
