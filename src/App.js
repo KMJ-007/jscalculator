@@ -123,8 +123,12 @@ console.log(s,e.target.value)
   }
   calc() {
    calculated=true;
+   let answer=eval(this.state.value)
+   let finalAnswer=answer.toString();
+   console.log("the aswer is",finalAnswer)
+   console.log("type is ",typeof(finalAnswer))
     this.setState({
-      value: eval(this.state.value),
+      value: finalAnswer,
     });
     
  
